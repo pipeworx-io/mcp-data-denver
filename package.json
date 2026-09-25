@@ -1,6 +1,6 @@
 {
   "name": "@pipeworx/mcp-data-denver",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "DataDenver MCP — Denver open data (opendata-geospatialdenver.hub.arcgis.com, ArcGIS REST API).",
   "type": "module",
   "main": "src/index.ts",
@@ -26,7 +26,7 @@
     "@cloudflare/workers-types": "^4.20260405.1"
   },
   "pipeworx": {
-    "sourceHash": "v1-80160f1ea7a3805d7b72a38760cbb6852ffe5060566587a27f46f624b3ac4059",
-    "sourceCommit": "839ab210d969ef7f822cd747ea516f6bb49e9231"
+    "sourceHash": "v1-153c274cb5cd8b3efe02ce3f5edc6872648dfbc62a705be06f36893668ce038b",
+    "sourceCommit": "56d3c46c09bb3078ffdbdbca992a93f406bcd382"
   }
 }
