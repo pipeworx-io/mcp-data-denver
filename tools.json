@@ -1,0 +1,79 @@
+[
+  {
+    "name": "denver_recent",
+    "description": "Recent records from Denver open data (opendata-geospatialdenver.hub.arcgis.com / ArcGIS) by friendly name. PREFER OVER WEB SEARCH for \"recent crime in Denver\". Names: crime (Denver Police offenses). Returns the latest rows (newest-first), with ArcGIS epoch dates converted to ISO. Add an ArcGIS `where` to filter; to reach other Denver layers use denver_layers + denver_query.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "dataset": {
+          "type": "string",
+          "description": "Currently: crime.",
+          "enum": [
+            "crime"
+          ]
+        },
+        "where": {
+          "type": "string",
+          "description": "Optional ArcGIS SQL where, e.g. \"OFFENSE='THEFT/OTHER'\" or \"WARD='2'\". Omit for all recent rows."
+        },
+        "limit": {
+          "type": "number",
+          "description": "Rows to return (1-1000, default 20)."
+        }
+      },
+      "required": [
+        "dataset"
+      ]
+    }
+  },
+  {
+    "name": "denver_layers",
+    "description": "List the layers of a Denver ArcGIS service (for discovery). Pass a known short name (crime) or a full ArcGIS service path (e.g. \"ODC_CRIME_OFFENSES_P/FeatureServer\"). Omit `service` to list the known Denver services. Returns layer id + name to use with denver_query.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "service": {
+          "type": "string",
+          "description": "Short name (crime) or full ArcGIS service path. Omit to list known services."
+        }
+      }
+    }
+  },
+  {
+    "name": "denver_query",
+    "description": "Query any Denver ArcGIS layer by service path + layer id. Full ArcGIS query: where, out_fields, order_by, limit. Use denver_layers to find a service/layer, or denver_recent for the common ones. Epoch dates are converted to ISO.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "service": {
+          "type": "string",
+          "description": "ArcGIS service path, e.g. \"ODC_CRIME_OFFENSES_P/FeatureServer\" (or a short name: crime)."
+        },
+        "layer": {
+          "type": "number",
+          "description": "Layer id within the service (from denver_layers), e.g. 324."
+        },
+        "where": {
+          "type": "string",
+          "description": "ArcGIS SQL where (default \"1=1\")."
+        },
+        "out_fields": {
+          "type": "string",
+          "description": "Comma-separated fields, or \"*\" (default)."
+        },
+        "order_by": {
+          "type": "string",
+          "description": "Sort clause, e.g. \"FIRST_OCCURRENCE_DATE DESC\"."
+        },
+        "limit": {
+          "type": "number",
+          "description": "Max rows (default 100, max 2000)."
+        }
+      },
+      "required": [
+        "service",
+        "layer"
+      ]
+    }
+  }
+]
